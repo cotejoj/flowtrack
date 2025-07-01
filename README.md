@@ -1,69 +1,64 @@
-# React + TypeScript + Vite
+# FlowTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FlowTrack is a simple and intuitive task management app that helps you organize your tasks in four categories: To Do, Pending, Done, and Backlog. It supports adding, editing, deleting, and drag-and-drop task movement — all saved locally in your browser.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Add new tasks to the **Backlog** column
+- Drag and drop tasks between **To Do**, **Pending**, **Done**, and **Backlog**
+- Edit task names inline
+- Delete tasks easily
+- Highlight tasks marked as **Done**
+- Display the date when each task was added
+- Data persists in browser **localStorage**
+- Responsive and clean user interface
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Prerequisites
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js and npm installed on your machine
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Installation
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Clone this repository:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+   ```bash
+   git clone https://github.com/your-username/flowtrack.git
+   cd flowtrack
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+2. Install dependencies:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+   ```bash
+   npm install
+   ```
+
+3. Run the development server:
+
+   ```bash
+   npm start
+   ```
+
+Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to use the app.
+
+## Project Structure
+
+- `src/components/` — React components such as `Header`, `TaskList`, and `Footer`
+- `src/App.tsx` — Main app entry point
+- `src/TaskList.css` — Styles for task list UI
+- `src/Header.css`, `src/Footer.css` — Styles for header and footer
+
+## Technologies Used
+
+- React with TypeScript
+- CSS for styling
+- Browser localStorage for persistence
+
+## Author
+
+Created by [Jomar Cotejo](https://your-portfolio-url.com)
+
+## License
+
+This project is licensed under the MIT License.
