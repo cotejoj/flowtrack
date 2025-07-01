@@ -161,10 +161,10 @@ export default function TaskList() {
       </form>
 
       <div className="task-container">
+        {renderColumn("Backlog", "backlog")}
         {renderColumn("To Do", "todo")}
         {renderColumn("Pending", "pending")}
         {renderColumn("Done", "done")}
-        {renderColumn("Backlog", "backlog")}
       </div>
     </div>
   );
