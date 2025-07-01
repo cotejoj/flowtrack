@@ -24,7 +24,7 @@ FlowTrack is a simple and intuitive task management app that helps you organize 
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/your-username/flowtrack.git
+   git clone https://github.com/cotejoj/flowtrack.git
    cd flowtrack
    ```
 
