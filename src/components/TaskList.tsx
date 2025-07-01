@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TaskList.css";
 
 type TaskStatus = "todo" | "pending" | "done" | "backlog";
@@ -12,20 +12,44 @@ type TaskMap = {
   [key in TaskStatus]: Task[];
 };
 
+const STORAGE_KEY = "taskListData";
 const generateId = () => crypto.randomUUID();
 
 export default function TaskList() {
-  const [taskInput, setTaskInput] = useState<string>("");
-  const [tasks, setTasks] = useState<TaskMap>({
-    todo: [
-      { id: generateId(), text: "Task 1" },
-      { id: generateId(), text: "Task 2" },
-    ],
-    pending: [],
-    done: [],
-    backlog: [],
+  // ✅ Load tasks from localStorage only once
+  const [tasks, setTasks] = useState<TaskMap>(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          parsed &&
+          ["todo", "pending", "done", "backlog"].every((key) =>
+            Array.isArray(parsed[key])
+          )
+        ) {
+          return parsed as TaskMap;
+        }
+      } catch (e) {
+        console.error("Failed to load tasks from localStorage", e);
+      }
+    }
+
+    // Default fallback if nothing in localStorage
+    return {
+      todo: [],
+      pending: [],
+      done: [],
+      backlog: [],
+    };
   });
 
+  // ✅ Save tasks to localStorage on any change
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+  }, [tasks]);
+
+  const [taskInput, setTaskInput] = useState("");
   const [draggedTask, setDraggedTask] = useState<Task | null>(null);
   const [dragSource, setDragSource] = useState<TaskStatus | null>(null);
 
@@ -48,6 +72,7 @@ export default function TaskList() {
 
   const handleDrop = (target: TaskStatus) => {
     if (!draggedTask || !dragSource) return;
+    if (dragSource === target) return;
 
     setTasks((prev) => {
       const newSource = prev[dragSource].filter((t) => t.id !== draggedTask.id);
@@ -77,6 +102,8 @@ export default function TaskList() {
     column: TaskStatus
   ) => {
     const newText = e.target.innerText.trim();
+    if (!newText) return;
+
     setTasks((prev) => ({
       ...prev,
       [column]: prev[column].map((task) =>
@@ -94,12 +121,12 @@ export default function TaskList() {
       <h2>{title}</h2>
       <ul>
         {tasks[key].map((task) => (
-            <li
+          <li
             key={task.id}
             draggable
             onDragStart={() => handleDragStart(task, key)}
             className={key === "done" ? "task-item done-task" : "task-item"}
-            >
+          >
             <span
               contentEditable
               suppressContentEditableWarning
