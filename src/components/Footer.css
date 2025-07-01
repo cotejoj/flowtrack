@@ -1,0 +1,28 @@
+.app-footer {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 3rem;
+  user-select: none;
+}
+
+.footer-link {
+  color: #4fc3f7;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 0.3em;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
+  color: #81d4fa;
+  cursor: pointer;
+}
+
+.footer-icon {
+  vertical-align: middle;
+  margin: 0 0.3em;
+  color: #4fc3f7;
+}
