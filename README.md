@@ -37,10 +37,10 @@ FlowTrack is a simple and intuitive task management app that helps you organize 
 3. Run the development server:
 
    ```bash
-   npm start
+   npm run dev
    ```
 
-Open your browser and navigate to [http://localhost:3000](http://localhost:3000) to use the app.
+Open your browser and navigate to [http://localhost:5137](http://localhost:5137) to use the app.
 
 ## Project Structure
 
@@ -57,8 +57,5 @@ Open your browser and navigate to [http://localhost:3000](http://localhost:3000)
 
 ## Author
 
-Created by [Jomar Cotejo](https://your-portfolio-url.com)
+Created by [Jomar Cotejo](https://jomarcotejo.com)
 
-## License
-
-This project is licensed under the MIT License.
