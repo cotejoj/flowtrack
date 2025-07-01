@@ -94,11 +94,12 @@ export default function TaskList() {
       <h2>{title}</h2>
       <ul>
         {tasks[key].map((task) => (
-          <li
+            <li
             key={task.id}
             draggable
             onDragStart={() => handleDragStart(task, key)}
-          >
+            className={key === "done" ? "task-item done-task" : "task-item"}
+            >
             <span
               contentEditable
               suppressContentEditableWarning
