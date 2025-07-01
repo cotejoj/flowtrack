@@ -60,7 +60,7 @@ export default function TaskList() {
     const newTask: Task = { id: generateId(), text: taskInput.trim() };
     setTasks((prev) => ({
       ...prev,
-      todo: [...prev.todo, newTask],
+      backlog: [...prev.backlog, newTask],
     }));
     setTaskInput("");
   };
