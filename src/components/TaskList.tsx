@@ -6,6 +6,7 @@ type TaskStatus = "todo" | "pending" | "done" | "backlog";
 type Task = {
   id: string;
   text: string;
+  createdAt: string; 
 };
 
 type TaskMap = {
@@ -53,17 +54,22 @@ export default function TaskList() {
   const [draggedTask, setDraggedTask] = useState<Task | null>(null);
   const [dragSource, setDragSource] = useState<TaskStatus | null>(null);
 
-  const handleAddTask = (e: React.FormEvent) => {
+    const handleAddTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (!taskInput.trim()) return;
 
-    const newTask: Task = { id: generateId(), text: taskInput.trim() };
+    const newTask: Task = {
+        id: generateId(),
+        text: taskInput.trim(),
+        createdAt: new Date().toISOString(),
+    };
     setTasks((prev) => ({
-      ...prev,
-      backlog: [...prev.backlog, newTask],
+        ...prev,
+        backlog: [...prev.backlog, newTask],
     }));
     setTaskInput("");
-  };
+    };
+
 
   const handleDragStart = (task: Task, source: TaskStatus) => {
     setDraggedTask(task);
@@ -121,28 +127,33 @@ export default function TaskList() {
       <h2>{title}</h2>
       <ul>
         {tasks[key].map((task) => (
-          <li
+            <li
             key={task.id}
             draggable
             onDragStart={() => handleDragStart(task, key)}
             className={key === "done" ? "task-item done-task" : "task-item"}
-          >
-            <span
-              contentEditable
-              suppressContentEditableWarning
-              onBlur={(e) => handleEdit(e, task.id, key)}
-              className="editable"
             >
-              {task.text}
-            </span>
+            <div className="task-text-container">
+                <span
+                contentEditable
+                suppressContentEditableWarning
+                onBlur={(e) => handleEdit(e, task.id, key)}
+                className="editable"
+                >
+                {task.text}
+                </span>
+                <small className="task-date">
+                Added: {new Date(task.createdAt).toLocaleDateString()}
+                </small>
+            </div>
             <button
-              className="delete-btn"
-              onClick={() => handleDelete(task.id, key)}
-              title="Delete task"
+                className="delete-btn"
+                onClick={() => handleDelete(task.id, key)}
+                title="Delete task"
             >
-              ×
+                ×
             </button>
-          </li>
+            </li>
         ))}
       </ul>
     </div>
